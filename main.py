@@ -1,4 +1,3 @@
-from random import weibullvariate
 from tkinter import *
 from tkinter import ttk
 
