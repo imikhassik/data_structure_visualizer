@@ -25,6 +25,7 @@ root.rowconfigure(0, weight=1)
 sketchpad = Sketchpad(root, width=1500, height=750, background='white')
 sketchpad.grid(column=0, row=0, sticky="nswe")
 
-sketchpad.create_line(10, 10, 200, 50, 90, 150, 50, 80, fill="red", width=10, activestipple="gray50", joinstyle="miter", smooth="raw", splinesteps=50)
+sketchpad.create_oval(625, 250, 875, 500, fill='red', outline='blue', width=5, activestipple="gray50")
+sketchpad.create_text(700, 300, text='A wonderful story', anchor='nw', font='TkMenuFont', fill='white')
 
 root.mainloop()
