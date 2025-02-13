@@ -27,5 +27,5 @@ sketchpad.grid(column=0, row=0, sticky="nswe")
 
 sketchpad.create_oval(625, 250, 875, 500, fill='red', outline='blue', width=5, activestipple="gray50")
 sketchpad.create_text(700, 300, text='A wonderful story', anchor='nw', font='TkMenuFont', fill='white')
-
+print('')
 root.mainloop()
