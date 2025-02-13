@@ -2,30 +2,37 @@ from tkinter import *
 from tkinter import ttk
 
 
-class Sketchpad(Canvas):
-    def __init__(self, parent, **kwargs):
-        super().__init__(parent, **kwargs)
-        self.last_x = None
-        self.last_y = None
-        self.bind("<Button-1>", self.save_position)
-        self.bind("<B1-Motion>", self.add_line)
+class MainWindow:
+    def __init__(self):
+        self._root = Tk()
+        self._example_value = StringVar()
+        self._example_value.trace_add("write", self._parse_user_entry)
+        self._configure()
+        self._grid()
 
-    def save_position(self, event):
-        self.last_x, self.last_y = event.x, event.y
+    def _configure(self):
+        self._root.columnconfigure(0, weight=1)
+        self._root.rowconfigure(2, weight=1)
 
-    def add_line(self, event):
-        self.create_line(self.last_x, self.last_y, event.x, event.y)
-        self.save_position(event)
+    def _populate(self):
+        self._content = ttk.Frame(self._root, padding=12)
+        self._example_label = ttk.Label(self._content, text="Example:")
+        self._steps_label = ttk.Label(self._content, text="Steps:")
+        self._example_entry = ttk.Entry(self._content, textvariable=self._example_value)
+
+    def _grid(self):
+        self._populate()
+        self._content.grid(column=0, row=0, sticky="nsew")
+        self._example_label.grid(column=0, row=0, sticky="w")
+        self._steps_label.grid(column=2, row=0, sticky="w")
+        self._example_entry.grid(column=0, row=1, columnspan=2, sticky="we")
+
+    def _parse_user_entry(self, *args):
+        print(self._example_value.get().split(','))
+
+    def start(self):
+        self._root.mainloop()
 
 
-root = Tk()
-root.columnconfigure(0, weight=1)
-root.rowconfigure(0, weight=1)
-
-sketchpad = Sketchpad(root, width=1500, height=750, background='white')
-sketchpad.grid(column=0, row=0, sticky="nswe")
-
-sketchpad.create_oval(625, 250, 875, 500, fill='red', outline='blue', width=5, activestipple="gray50")
-sketchpad.create_text(700, 300, text='A wonderful story', anchor='nw', font='TkMenuFont', fill='white')
-print('')
-root.mainloop()
+main_window = MainWindow()
+main_window.start()
