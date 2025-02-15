@@ -9,7 +9,7 @@ class MainWindow:
     def __init__(self):
         self._root = Tk()
         self._example_value = StringVar()
-        # self._example_value.trace_add("write", self._parse_user_entry)
+
         self._configure_window()
         self._create_widgets()
         self._configure_widgets()
@@ -31,11 +31,16 @@ class MainWindow:
         self._content.configure(padding=12)
         self._content.rowconfigure(index=2, weight=1)
         self._content.columnconfigure(index=2, weight=1)
+
         self._example_label.configure(text="Example:")
+
         self._steps_label.configure(text="Steps:")
+
         self._example_entry.configure(textvariable=self._example_value)
         self._example_entry.bind("<Return>", self._parse_user_entry)
+
         self._canvas.configure(width=1000, height=500, background="white")
+
         self._steps.configure(text="1. Step number one\n2. Step number two\n3. Step number three")
 
     def _grid_widgets(self):
