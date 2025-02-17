@@ -11,9 +11,8 @@ class LinkedList:
         self.tail = Node()
         self.head.next = self.tail
         self.tail.prev = self.head
-
-        for val in arr:
-            self.append_node(val)
+        self.data = arr
+        self._build()
 
     def __repr__(self):
         cur = self.head.next
@@ -23,10 +22,17 @@ class LinkedList:
             cur = cur.next
         return '->'.join(res)
 
-    def append_node(self, val):
+    def _build(self):
+        for val in self.data:
+            self._append_node(val)
+
+    def _append_node(self, val):
         node = Node(val)
         predecessor = self.tail.prev
         predecessor.next = node
         self.tail.prev = node
         node.prev = predecessor
         node.next = self.tail
+
+    def map_to_canvas(self):
+        pass

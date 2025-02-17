@@ -1,8 +1,8 @@
 from tkinter import *
 from tkinter import ttk
 
+from ds_factory import DataStructureFactory, DSType
 from entry_parser import EntryParser
-from data_structures.linked_list import LinkedList
 
 
 class MainWindow:
@@ -53,11 +53,13 @@ class MainWindow:
 
     def _parse_user_entry(self, *args):
         parser = EntryParser()
-        parser.parse(self._example_value.get())
+        parser.parse(entry_value=self._example_value.get())
 
         for entry in parser.result:
-            ll = LinkedList(entry)
-            print(ll)
+            factory = DataStructureFactory()
+            data_structure = factory.create(entry, DSType.LINKED_LIST)
+            data_structure.map_to_canvas()
+            print(data_structure)
 
     def start(self):
         self._root.mainloop()
