@@ -40,12 +40,14 @@ class MainWindow:
         self._steps_label.configure(text="Steps:")
 
         self._example_entry.configure(textvariable=self._example_value)
-        self._example_entry.bind(sequence="<Return>", func=self._parse_user_entry)
+        self._example_entry.bind(sequence="<Return>", func=self._map_data_structures_to_canvas)
+        self._example_entry.focus()
 
         self._ds_type_entry.configure(textvariable=self._ds_type_value)
         self._ds_type_entry['values'] = [DSType.LINKED_LIST, DSType.TREE, DSType.GRAPH]
         self._ds_type_entry.state(['readonly'])
-        self._ds_type_entry.bind(sequence="<<ComboboxSelected>>", func=self._clear_ds_type_selection)
+        self._ds_type_entry.current(0)
+        self._ds_type_entry.bind(sequence="<Key>", func=self._process_ds_type_event)
 
         self._canvas.configure(width=1000, height=500, background="white")
 
@@ -60,18 +62,23 @@ class MainWindow:
         self._canvas.grid(column=0, row=2, columnspan=2, sticky="nsew")
         self._steps.grid(column=2, row=1, rowspan=2, padx=10, pady=10, sticky="new")
 
-    def _parse_user_entry(self, *args):
+    def _map_data_structures_to_canvas(self, *args):
         parser = EntryParser()
         parser.parse(entry_value=self._example_value.get())
-
         for entry in parser.result:
             factory = DataStructureFactory()
             data_structure = factory.create(entry=entry, ds_type=self._ds_type_value.get())
             data_structure.map_to_canvas()
             print(data_structure)
 
-    def _clear_ds_type_selection(self, *args):
-        self._ds_type_entry.select_clear()
+    def _process_ds_type_event(self, event, *args):
+        match event.keysym:
+            case "l":
+                self._ds_type_entry.current(0)
+            case "t":
+                self._ds_type_entry.current(1)
+            case "g":
+                self._ds_type_entry.current(2)
         self._example_entry.focus()
 
     def start(self):
