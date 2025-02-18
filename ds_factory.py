@@ -1,10 +1,12 @@
-from enum import Enum
+from enum import StrEnum
 
 from data_structures.linked_list import LinkedList
 
 
-class DSType(Enum):
-    LINKED_LIST = 1
+class DSType(StrEnum):
+    LINKED_LIST = "Linked List"
+    TREE = "Tree"
+    GRAPH = "Graph"
 
 
 class DataStructureFactory:
