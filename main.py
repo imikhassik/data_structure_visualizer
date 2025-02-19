@@ -68,7 +68,7 @@ class MainWindow:
         for entry in parser.result:
             factory = DataStructureFactory()
             data_structure = factory.create(entry=entry, ds_type=self._ds_type_value.get())
-            data_structure.map_to_canvas()
+            data_structure.map_to_canvas(self._canvas)
             print(data_structure)
 
     def _process_ds_type_event(self, event, *args):
