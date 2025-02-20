@@ -8,11 +8,10 @@ class Node:
         self.next = None
         self.prev = None
 
+        self.coordinates = Coordinates()
         self.oval = None
         self.arrow = None
-        self.coordinates = Coordinates()
-        self.node_diameter = NODE_DIAMETER_IN_PIXELS
-        self.arrow_length = ARROW_LENGTH_IN_PIXELS
+        self.text = None
 
 
 class LinkedList:
@@ -22,7 +21,6 @@ class LinkedList:
         self.head.next = self.tail
         self.tail.prev = self.head
         self.data = arr
-
         self.coordinates = coordinates
         self._build()
 
@@ -77,11 +75,22 @@ class LinkedList:
             width=2
         )
 
+    @staticmethod
+    def _get_node_text(canvas, node):
+        return canvas.create_text(
+            node.coordinates.x + NODE_DIAMETER_IN_PIXELS // 2,
+            node.coordinates.y + NODE_DIAMETER_IN_PIXELS // 2,
+            text=node.val,
+            font=VALUE_FONT
+        )
+
     def map_to_canvas(self, canvas):
         cur = self.head.next
         while cur != self.tail:
             cur.oval = self._get_node_oval(canvas, cur)
             cur.arrow = self._get_node_arrow(canvas, cur)
+            cur.text = self._get_node_text(canvas, cur)
             print(f"current node oval id: {cur.oval}")
             print(f"current node arrow id: {cur.arrow}")
+            print(f"current node text id: {cur.text}")
             cur = cur.next
