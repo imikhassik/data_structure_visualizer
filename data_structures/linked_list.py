@@ -55,17 +55,33 @@ class LinkedList:
             node.coordinates.x = node.prev.coordinates.x + NODE_DIAMETER_IN_PIXELS + ARROW_LENGTH_IN_PIXELS
             node.coordinates.y = self.coordinates.y
 
+    @staticmethod
+    def _get_node_oval(canvas, node):
+        return canvas.create_oval(
+                node.coordinates.x,
+                node.coordinates.y,
+                node.coordinates.x + NODE_DIAMETER_IN_PIXELS,
+                node.coordinates.y + NODE_DIAMETER_IN_PIXELS,
+                width=2
+            )
+
+    @staticmethod
+    def _get_node_arrow(canvas, node):
+        return canvas.create_line(
+            node.coordinates.x + NODE_DIAMETER_IN_PIXELS,
+            node.coordinates.y + NODE_DIAMETER_IN_PIXELS // 2,
+            node.coordinates.x + NODE_DIAMETER_IN_PIXELS + ARROW_LENGTH_IN_PIXELS,
+            node.coordinates.y + NODE_DIAMETER_IN_PIXELS // 2,
+            arrow='last',
+            arrowshape=ARROW_SHAPE,
+            width=2
+        )
+
     def map_to_canvas(self, canvas):
         cur = self.head.next
         while cur != self.tail:
-            cur.oval = canvas.create_oval(
-                cur.coordinates.x,
-                cur.coordinates.y,
-                cur.coordinates.x + NODE_DIAMETER_IN_PIXELS,
-                cur.coordinates.y + NODE_DIAMETER_IN_PIXELS,
-                fill='white',
-                outline='black',
-                width=2
-            )
+            cur.oval = self._get_node_oval(canvas, cur)
+            cur.arrow = self._get_node_arrow(canvas, cur)
             print(f"current node oval id: {cur.oval}")
+            print(f"current node arrow id: {cur.arrow}")
             cur = cur.next
