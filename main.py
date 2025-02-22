@@ -63,8 +63,8 @@ class MainWindow:
         self._steps.grid(column=2, row=1, rowspan=2, padx=10, pady=10, sticky="new")
 
     def _map_data_structures_to_canvas(self, *args):
-        parser = EntryParser()
-        parser.parse(entry_value=self._example_value.get())
+        parser = EntryParser(entry=self._example_value.get())
+        parser.parse()
         for entry in parser.result:
             factory = DataStructureFactory()
             data_structure = factory.create(entry=entry, ds_type=self._ds_type_value.get())
