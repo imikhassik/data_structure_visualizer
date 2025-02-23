@@ -1,14 +1,6 @@
-from enum import StrEnum
-
 from data_structures.linked_list import LinkedList
 from constants import *
-from utils import Coordinates
-
-
-class DSType(StrEnum):
-    LINKED_LIST = "Linked List"
-    TREE = "Tree"
-    GRAPH = "Graph"
+from utils import Coordinates, DSType
 
 
 class DataStructureFactory:

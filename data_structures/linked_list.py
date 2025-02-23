@@ -1,5 +1,5 @@
 from constants import *
-from utils import Coordinates
+from utils import Coordinates, Tag
 
 
 class Node:
@@ -60,7 +60,8 @@ class LinkedList:
                 node.coordinates.y,
                 node.coordinates.x + NODE_DIAMETER_IN_PIXELS,
                 node.coordinates.y + NODE_DIAMETER_IN_PIXELS,
-                width=2
+                width=2,
+                tags=Tag.ALL_CANVAS_ITEMS
             )
 
     @staticmethod
@@ -72,7 +73,8 @@ class LinkedList:
             node.coordinates.y + NODE_DIAMETER_IN_PIXELS // 2,
             arrow='last',
             arrowshape=ARROW_SHAPE,
-            width=2
+            width=2,
+            tags=Tag.ALL_CANVAS_ITEMS
         )
 
     @staticmethod
@@ -81,7 +83,8 @@ class LinkedList:
             node.coordinates.x + NODE_DIAMETER_IN_PIXELS // 2,
             node.coordinates.y + NODE_DIAMETER_IN_PIXELS // 2,
             text=node.val,
-            font=VALUE_FONT
+            font=VALUE_FONT,
+            tags=Tag.ALL_CANVAS_ITEMS
         )
 
     def map_to_canvas(self, canvas):

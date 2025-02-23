@@ -1,8 +1,9 @@
 from tkinter import *
 from tkinter import ttk
 
-from ds_factory import DataStructureFactory, DSType
+from ds_factory import DataStructureFactory
 from entry_parser import EntryParser
+from utils import Tag, DSType
 
 
 class MainWindow:
@@ -63,6 +64,7 @@ class MainWindow:
         self._steps.grid(column=2, row=1, rowspan=2, padx=10, pady=10, sticky="new")
 
     def _map_data_structures_to_canvas(self, *args):
+        self._canvas.delete(Tag.ALL_CANVAS_ITEMS)
         parser = EntryParser(entry=self._example_value.get())
         parser.parse()
         for entry in parser.result:
