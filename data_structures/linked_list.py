@@ -22,6 +22,7 @@ class LinkedList:
         self.tail.prev = self.head
         self.data = arr
         self.coordinates = coordinates
+        self.nodes = []
         self._build()
 
     def __repr__(self):
@@ -45,6 +46,7 @@ class LinkedList:
         node.next = self.tail
 
         self._get_node_coordinates(node)
+        self.nodes.append(node)
 
     def _get_node_coordinates(self, node):
         if node.prev.coordinates.x == 0:

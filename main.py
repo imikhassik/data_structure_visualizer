@@ -4,6 +4,7 @@ from tkinter import ttk
 from ds_factory import DataStructureFactory
 from entry_parser import EntryParser
 from utils import Tag, DSType
+from constants import *
 
 
 class MainWindow:
@@ -50,7 +51,7 @@ class MainWindow:
         self._ds_type_entry.current(0)
         self._ds_type_entry.bind(sequence="<Key>", func=self._process_ds_type_event)
 
-        self._canvas.configure(width=1000, height=500, background="white")
+        self._canvas.configure(width=CANVAS_WIDTH_IN_PIXELS, height=CANVAS_HEIGHT_IN_PIXELS, background="white")
 
         self._steps.configure(text="1. Step number one\n2. Step number two\n3. Step number three")
 
@@ -67,11 +68,13 @@ class MainWindow:
         self._canvas.delete(Tag.ALL_CANVAS_ITEMS)
         parser = EntryParser(entry=self._example_value.get())
         parser.parse()
-        for entry in parser.result:
-            factory = DataStructureFactory()
-            data_structure = factory.create(entry=entry, ds_type=self._ds_type_value.get())
-            data_structure.map_to_canvas(self._canvas)
-            print(data_structure)
+        factory = DataStructureFactory(
+            canvas_width=self._canvas.winfo_width(),
+            canvas_height=self._canvas.winfo_height()
+        )
+        data_structures = factory.create(entries=parser.result, ds_type=self._ds_type_value.get())
+        for ds in data_structures:
+            ds.map_to_canvas(self._canvas)
 
     def _process_ds_type_event(self, event, *args):
         match event.keysym:
