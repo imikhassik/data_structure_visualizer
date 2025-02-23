@@ -1,5 +1,3 @@
-# TODO: test
-# TODO: add error handling for user input
 class EntryParser:
     def __init__(self, entry):
         self.result = []
