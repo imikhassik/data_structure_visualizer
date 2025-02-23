@@ -18,9 +18,6 @@ class EntryParser:
         self.entry = self.entry[start:]
 
     def _validate_entry(self):
-        if not self.entry:
-            raise ValueError("Entry can't be empty.")
-
         brackets = []
         for c in self.entry:
             if c == "[":

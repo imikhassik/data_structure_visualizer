@@ -46,6 +46,13 @@ class TestEntryParser(unittest.TestCase):
         p.parse()
         self.assertEqual(p.result, expected_result)
 
+    def test_invalid_separator_separated(self):
+        entry = "[1.2.3]"
+        expected_result = [["123"]]
+        p = EntryParser(entry)
+        p.parse()
+        self.assertEqual(p.result, expected_result)
+
     def test_combined_values(self):
         entry = "[12, abc, 34], [445, 5, 6567]"
         expected_result = [["12", "abc", "34"], ["445", "5", "6567"]]
@@ -55,6 +62,13 @@ class TestEntryParser(unittest.TestCase):
 
     def test_skip_whitespace_start_list_entry(self):
         entry = " [1, 2, 3]"
+        expected_result = [["1", "2", "3"]]
+        p = EntryParser(entry)
+        p.parse()
+        self.assertEqual(p.result, expected_result)
+
+    def test_skip_invalid_chars_list_entry(self):
+        entry = "1334 adgdfa [1, 2, 3]"
         expected_result = [["1", "2", "3"]]
         p = EntryParser(entry)
         p.parse()
