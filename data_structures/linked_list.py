@@ -1,6 +1,8 @@
 from constants import *
 from utils import Coordinates, Tag
 
+from items.arrow import Arrow
+
 
 class Node:
     def __init__(self, val=0):
@@ -68,17 +70,7 @@ class LinkedList:
 
     @staticmethod
     def _get_node_arrow(canvas, node):
-        return canvas.create_line(
-            node.coordinates.x + NODE_DIAMETER_IN_PIXELS,
-            node.coordinates.y + NODE_DIAMETER_IN_PIXELS // 2,
-            node.coordinates.x + NODE_DIAMETER_IN_PIXELS + ARROW_LENGTH_IN_PIXELS,
-            node.coordinates.y + NODE_DIAMETER_IN_PIXELS // 2,
-            arrow='last',
-            arrowshape=ARROW_SHAPE,
-            width=2,
-            tags=(Tag.ALL_CANVAS_ITEMS, Tag.POINTER),
-            activefill='#00FF00'
-        )
+        return Arrow(canvas, node)
 
     @staticmethod
     def _get_node_text(canvas, node):
