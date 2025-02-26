@@ -76,7 +76,8 @@ class LinkedList:
             arrow='last',
             arrowshape=ARROW_SHAPE,
             width=2,
-            tags=Tag.ALL_CANVAS_ITEMS
+            tags=(Tag.ALL_CANVAS_ITEMS, Tag.POINTER),
+            activefill='#00FF00'
         )
 
     @staticmethod

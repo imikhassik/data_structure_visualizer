@@ -8,6 +8,7 @@ class Coordinates:
 
 class Tag(StrEnum):
     ALL_CANVAS_ITEMS = "all_canvas_items"
+    POINTER = "pointer"
 
 
 class DSType(StrEnum):
